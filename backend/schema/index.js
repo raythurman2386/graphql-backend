@@ -1,6 +1,6 @@
 const graphql = require('graphql')
 const { Tech, Job } = require('../models/Model')
-const { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLSchema, GraphQLList } = graphql
+const { GraphQLObjectType, GraphQLID, GraphQLSchema, GraphQLList } = graphql
 const { TechType, JobType } = require('../types')
 const { Mutation } = require('../mutations')
 
