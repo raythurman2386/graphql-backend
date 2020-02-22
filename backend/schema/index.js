@@ -64,6 +64,42 @@ const RootQuery = new GraphQLObjectType({
   }
 })
 
+const Mutation = new GraphQLObjectType({
+  name: 'Mutation',
+  fields: {
+    addTech: {
+      type: TechType,
+      args: {
+        name: { type: GraphQLString }
+      },
+      resolve(parent, args) {
+        let tech = {
+          name: args.name
+        }
+        return Tech.add(tech)
+      }
+    },
+    addJob: {
+      type: JobType,
+      args: {
+        machine: { type: GraphQLString },
+        complaint: { type: GraphQLString },
+        tech_id: { type: GraphQLID }
+      },
+      resolve(parent, args) {
+        let job = {
+          machine: args.machine,
+          complaint: args.complaint,
+          tech_id: args.tech_id
+        }
+
+        return Tech.add(job)
+      }
+    }
+  }
+})
+
 module.exports = new GraphQLSchema({
-  query: RootQuery
+  query: RootQuery,
+  mutation: Mutation
 })
