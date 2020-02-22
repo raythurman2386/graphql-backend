@@ -21,6 +21,7 @@ const JobMutation = {
       return Job.add(job)
     }
   },
+
   updateJob: {
     type: JobType,
     args: {
