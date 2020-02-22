@@ -1,35 +1,8 @@
 const graphql = require('graphql')
 const { Tech, Job } = require('../models/Model')
 const { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLSchema, GraphQLList } = graphql
-
-const TechType = new GraphQLObjectType({
-  name: 'Tech',
-  fields: () => ({
-    id: { type: GraphQLID },
-    name: { type: GraphQLString },
-    jobs: {
-      type: new GraphQLList(JobType),
-      resolve(parent, args) {
-        return Job.findTechJobs(parent.id)
-      }
-    }
-  })
-})
-
-const JobType = new GraphQLObjectType({
-  name: 'Job',
-  fields: () => ({
-    id: { type: GraphQLID },
-    machine: { type: GraphQLString },
-    complaint: { type: GraphQLString },
-    tech: {
-      type: TechType,
-      resolve(parent, args) {
-        return Tech.findById(parent.tech_id)
-      }
-    }
-  })
-})
+const { TechType, JobType } = require('../types')
+const { Mutation } = require('../mutations')
 
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
@@ -64,40 +37,6 @@ const RootQuery = new GraphQLObjectType({
   }
 })
 
-const Mutation = new GraphQLObjectType({
-  name: 'Mutation',
-  fields: {
-    addTech: {
-      type: TechType,
-      args: {
-        name: { type: GraphQLString }
-      },
-      resolve(parent, args) {
-        let tech = {
-          name: args.name
-        }
-        return Tech.add(tech)
-      }
-    },
-    addJob: {
-      type: JobType,
-      args: {
-        machine: { type: GraphQLString },
-        complaint: { type: GraphQLString },
-        tech_id: { type: GraphQLID }
-      },
-      resolve(parent, args) {
-        let job = {
-          machine: args.machine,
-          complaint: args.complaint,
-          tech_id: args.tech_id
-        }
-
-        return Tech.add(job)
-      }
-    }
-  }
-})
 
 module.exports = new GraphQLSchema({
   query: RootQuery,
