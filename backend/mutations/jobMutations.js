@@ -12,11 +12,11 @@ const JobMutation = {
       tech_id: { type: GraphQLID }
     },
     resolve(parent, args) {
-      let job = {
+      let job = new JobType({
         machine: args.machine,
         complaint: args.complaint,
         tech_id: args.tech_id
-      }
+      })
 
       return Job.add(job)
     }
@@ -30,11 +30,11 @@ const JobMutation = {
       tech_id: { type: GraphQLID }
     },
     resolve(parent, args) {
-      let Job = {
+      let Job = new JobType({
         machine: args.machine,
         complaint: args.complaint,
         tech_id: args.tech_id
-      }
+      })
 
       return Job.update(Job)
     }

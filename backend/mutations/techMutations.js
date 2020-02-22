@@ -10,9 +10,9 @@ const TechMutation = {
       name: { type: GraphQLString }
     },
     resolve(parent, args) {
-      let tech = {
+      let tech = new TechType({
         name: args.name
-      }
+      })
       return Tech.add(tech)
     }
   },
@@ -22,9 +22,9 @@ const TechMutation = {
       name: { type: GraphQLString }
     },
     resolve(parent, args) {
-      let tech = {
+      let tech = new TechType({
         name: args.name
-      }
+      })
 
       return Tech.update(tech)
     }
