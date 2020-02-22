@@ -18,9 +18,9 @@ const Jobs = () => {
           tech: { name: string }
         }) => (
           <div>
-            <p>{wholeObject.machine}</p>
-            <p>{wholeObject.complaint}</p>
-            <p>{wholeObject.tech.name}</p>
+            <p>Machine: {wholeObject.machine}</p>
+            <p>Complaint: {wholeObject.complaint}</p>
+            <p>Tech Name: {wholeObject.tech.name}</p>
           </div>
         )
       )}
