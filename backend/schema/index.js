@@ -1,5 +1,5 @@
 const graphql = require('graphql')
-
+const { Tech, Job } = require('../models/Model')
 const { GraphQLObjectType, GraphQLInt, GraphQLString, GraphQLSchema } = graphql
 
 const TechType = new GraphQLObjectType({
@@ -28,6 +28,13 @@ const RootQuery = new GraphQLObjectType({
       resolve(parent, args) {
         // code to get data from db
         // args.id
+        Tech.findBy({ id: args.id })
+      }
+    },
+    techs: {
+      type: [TechType],
+      resolve(parent, args) {
+        Tech.find()
       }
     }
   }
