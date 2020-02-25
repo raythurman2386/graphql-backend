@@ -10,6 +10,8 @@ const AddJob = () => {
   const [techId, setTechId] = useState(1)
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
+    e.preventDefault()
+    console.log(machine, complaint, techId)
     addJob({
       variables: {
         machine,
@@ -49,8 +51,8 @@ export default AddJob
 // This is the GraphQL Mutation
 // Specify what data the mutation requires
 const ADD_JOB = gql`
-  mutation AddJob($type: Object) {
-    addJob(type: $type) {
+  mutation AddJob($machine: String!, $complaint: String!, $tech_id: Int!) {
+    addJob(machine: $machine, complaint: $complaint, tech_id: $tech_id) {
       machine
       complaint
       tech_id
