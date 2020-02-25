@@ -48,7 +48,6 @@ export default AddJob
 const ADD_JOB = gql`
   mutation AddJob($type: String!) {
     addJob(type: $type) {
-      id
       machine
       complaint
       tech_id
