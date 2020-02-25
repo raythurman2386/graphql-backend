@@ -30,6 +30,9 @@ const Jobs = () => {
 
 export default Jobs
 
+// This is the GraphQL Query
+// The data you have in here is what it will pull in
+// Add as much or as little as you need
 const JOBS = gql`
   {
     jobs {
