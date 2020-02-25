@@ -49,7 +49,7 @@ export default AddJob
 // This is the GraphQL Mutation
 // Specify what data the mutation requires
 const ADD_JOB = gql`
-  mutation AddJob($type: String) {
+  mutation AddJob($type: Object) {
     addJob(type: $type) {
       machine
       complaint
