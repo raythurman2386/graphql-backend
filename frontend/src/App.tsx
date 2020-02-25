@@ -2,6 +2,7 @@ import React from 'react'
 import { ApolloProvider } from '@apollo/react-hooks'
 import { client } from './apollo'
 import Jobs from './components/Jobs'
+import AddJob from './components/AddJob'
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <div className='App'>
         <h1>Hello</h1>
         <Jobs />
+        <AddJob />
       </div>
     </ApolloProvider>
   )
