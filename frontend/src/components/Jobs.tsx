@@ -17,7 +17,7 @@ const Jobs = () => {
           complaint: string
           tech: { name: number }
         }) => (
-          <div>
+          <div key={wholeObject.id}>
             <p>Machine: {wholeObject.machine}</p>
             <p>Complaint: {wholeObject.complaint}</p>
             <p>Tech Name: {wholeObject.tech.name}</p>

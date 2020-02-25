@@ -14,7 +14,7 @@ const AddJob = () => {
       variables: {
         machine,
         complaint,
-        techId
+        tech_id: techId
       }
     })
   }
@@ -49,8 +49,8 @@ export default AddJob
 // This is the GraphQL Mutation
 // Specify what data the mutation requires
 const ADD_JOB = gql`
-  mutation AddJob() {
-    addJob() {
+  mutation AddJob($type: String) {
+    addJob(type: $type) {
       machine
       complaint
       tech_id
