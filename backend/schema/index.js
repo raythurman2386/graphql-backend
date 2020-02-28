@@ -1,5 +1,6 @@
 const graphql = require('graphql')
 const { GraphQLObjectType, GraphQLSchema } = graphql
+const userSchema = require('./userSchema')
 const techSchema = require('./techSchema')
 const jobSchema = require('./jobSchema')
 const { Mutation } = require('../mutations')
@@ -7,6 +8,7 @@ const { Mutation } = require('../mutations')
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
+    ...userSchema,
     ...techSchema,
     ...jobSchema
   }
