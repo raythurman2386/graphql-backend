@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "server": "nodemon index.js"
+    "server": "cross-env NODE_ENV=production nodemon index.js",
+    "migrate:prod": "cross-env NODE_ENV=production knex migrate:latest"
   },
   "keywords": [],
   "author": "",
