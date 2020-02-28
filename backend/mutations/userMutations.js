@@ -9,19 +9,17 @@ const UserMutation = {
   signUp: {
     type: UserType,
     args: {
-      name: { type: GraphQLString }
+      name: { type: GraphQLString },
+      email: { type: GraphQLString },
+      password: { type: GraphQLString }
     },
 
     async resolve(parent, args) {
       const password = await bcrypt.hash(args.password, 10)
-      let user = await User.add({ ...args, password })
+      const [user] = await User.add({ ...args, password })
+      const token = await jwt.sign({ userId: user.id }, process.env.JWT_SECRET)
 
-      const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET)
-
-      return {
-        token,
-        user
-      }
+      return token
     }
   },
 
@@ -58,8 +56,8 @@ const UserMutation = {
       id: { type: GraphQLID }
     },
 
-    resolve(parent, args) {
-      return User.remove(parent.id)
+    async resolve(parent, args) {
+      return User.remove(args.id)
     }
   }
 }
