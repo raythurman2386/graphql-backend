@@ -56,4 +56,4 @@ const User = new Model('users')
 const Tech = new Model('techs')
 const Job = new JobModel('jobs')
 
-module.exports = { Tech, Job }
+module.exports = { User, Tech, Job }
