@@ -1,5 +1,4 @@
-
-exports.seed = async function (knex) {
+exports.seed = async function(knex) {
   await knex('techs').insert([
     { name: 'Test1' },
     { name: 'Test2' },
@@ -7,4 +6,4 @@ exports.seed = async function (knex) {
     { name: 'Test4' },
     { name: 'Test5' }
   ])
-};
+}

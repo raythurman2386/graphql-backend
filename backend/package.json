@@ -6,7 +6,13 @@
   "scripts": {
     "start": "node index.js",
     "server": "cross-env NODE_ENV=production nodemon index.js",
-    "migrate:prod": "cross-env NODE_ENV=production knex migrate:latest"
+    "format": "prettier \"**/*.{js,jsx,html}\" --write",
+    "migrate": "cross-env NODE_ENV=development knex migrate:latest",
+    "rollback": "cross-env NODE_ENV=development knex migrate:rollback",
+    "migrate:prod": "cross-env NODE_ENV=production knex migrate:latest",
+    "rollback:prod": "cross-env NODE_ENV=production knex migrate:rollback",
+    "seed": "knex seed:run",
+    "seed:prod": "cross-env NODE_ENV=production knex seed:run"
   },
   "keywords": [],
   "author": "",
