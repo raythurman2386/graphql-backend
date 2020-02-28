@@ -2,6 +2,16 @@ const graphql = require('graphql')
 const { Tech, Job } = require('../models/Model')
 const { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLList } = graphql
 
+const UserType = new GraphQLObjectType({
+  name: 'User',
+  fields: () => ({
+    id: { type: GraphQLID },
+    name: { type: GraphQLString },
+    email: { type: GraphQLString },
+    password: { type: GraphQLString }
+  })
+})
+
 const TechType = new GraphQLObjectType({
   name: 'Tech',
   fields: () => ({
@@ -31,4 +41,4 @@ const JobType = new GraphQLObjectType({
   })
 })
 
-module.exports = { TechType, JobType }
+module.exports = { UserType, TechType, JobType }
