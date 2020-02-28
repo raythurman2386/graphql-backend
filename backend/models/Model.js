@@ -10,23 +10,34 @@ class Model {
   }
 
   findBy(filter) {
-    return db(this.tablename).where(filter).first()
+    return db(this.tablename)
+      .where(filter)
+      .first()
   }
 
   findById(id) {
-    return db(this.tablename).where({ id }).first()
+    return db(this.tablename)
+      .where({ id })
+      .first()
   }
 
   add(item) {
-    return db(this.tablename).insert(item).returning('*')
+    return db(this.tablename)
+      .insert(item)
+      .returning('*')
   }
 
   update(id, item) {
-    return db(this.tablename).where({ id }).update(item).returning('*')
+    return db(this.tablename)
+      .where({ id })
+      .update(item)
+      .returning('*')
   }
 
   remove(id) {
-    return db(this.tablename).where({ id }).del()
+    return db(this.tablename)
+      .where({ id })
+      .del()
   }
 }
 
@@ -41,6 +52,7 @@ class JobModel extends Model {
   }
 }
 
+const User = new Model('users')
 const Tech = new Model('techs')
 const Job = new JobModel('jobs')
 
