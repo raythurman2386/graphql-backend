@@ -34,4 +34,10 @@ type AuthPayload {
 type Mutation {
   signup(email: String!, password: String!, name: String!): AuthPayload
   login(email: String!, password: String!): AuthPayload
+  addJob(machine: String!, complaint: String!, serial: String!, tech: Tech): Job
+  updateJob(machine: String, complaint: String, serial: String, tech: Tech): Job
+  deleteJob(id: ID!): Job
+  addTech(name: String!): Tech
+  updateTech(name: String!): Tech
+  deleteTech(id: ID!): Tech
 }
