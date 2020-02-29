@@ -17,7 +17,7 @@ async function signup(parent, args, context, info) {
 
 async function login(parent, args, context, info) {
   const user = await User.findBy({ email: args.email })
-  console.log(user)
+
   if (!user) {
     throw new Error('No such user found')
   }
