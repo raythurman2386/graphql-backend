@@ -3,17 +3,37 @@ const express = require('express')
 const { ApolloServer } = require('apollo-server-express')
 const typeDefs = require('../types')
 const resolvers = require('../resolvers')
+const { User } = require('../models/Model')
 
 // OAUTH STUFF
 const passport = require('passport')
+const { GraphQLLocalStrategy, buildContext } = require('graphql-passport')
 const FacebookStrategy = require('passport-facebook').Strategy
 
 const app = express()
 const server = new ApolloServer({
   typeDefs,
-  resolvers
+  resolvers,
+  context: ({ req, res }) => buildContext({ req, res, User })
 })
 
+// Local login
+passport.use(
+  new GraphQLLocalStrategy(async (email, password, done) => {
+    const user = await User.findBy(email)
+    console.log(user)
+
+    const error = user
+      ? null
+      : valid
+      ? null
+      : new Error('There has been an error')
+
+    done(error, { email, password })
+  })
+)
+
+// Facebook login
 passport.use(
   new FacebookStrategy(
     {
@@ -30,7 +50,7 @@ passport.use(
 
 app.use(passport.initialize())
 
-app.get('/facebook', passport.authenticate('facebook'))
+app.get('/login', passport.authenticate('facebook'))
 
 app.get(
   '/auth/facebook/callback',
@@ -44,6 +64,6 @@ app.get(
   }
 )
 
-server.applyMiddleware({ app })
+server.applyMiddleware({ app, cors: false })
 
 module.exports = { app, server }
