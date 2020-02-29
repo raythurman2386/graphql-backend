@@ -8,7 +8,17 @@ function jobs(root, args) {
   return Job.find()
 }
 
+function tech(root, args) {
+  return Tech.findById(args.id)
+}
+
+function job(root, args) {
+  return Job.findById(args.id)
+}
+
 module.exports = {
   techs,
-  jobs
+  jobs,
+  tech,
+  job
 }
