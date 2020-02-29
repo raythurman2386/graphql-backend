@@ -1,0 +1,23 @@
+type Query {
+
+}
+
+type User {
+  
+}
+
+type Tech {
+
+}
+
+type Job {
+
+}
+
+type AuthPayload {
+
+}
+
+type Mutation {
+
+}
