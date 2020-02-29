@@ -14,46 +14,30 @@ if (!process.env.DATABASE_URL) {
   pg.defaults.ssl = true
 }
 
-const sqlite = {
-  client: 'sqlite3',
+const postgres = {
+  client: 'pg',
   useNullAsDefault: true,
   migrations: {
     directory: './data/migrations'
   },
   seeds: {
     directory: './data/seeds'
-  },
-  pool: {
-    afterCreate: (conn, done) => {
-      conn.run('PRAGMA foreign_keys=ON', done)
-    }
   }
 }
 
 module.exports = {
   development: {
-    ...sqlite,
-    connection: {
-      filename: './data/database.db3'
-    }
+    ...postgres,
+    connection: localPg
   },
 
   test: {
-    ...sqlite,
-    connection: {
-      filename: './data/test.db3'
-    }
+    ...postgres,
+    connection: localPg
   },
 
   production: {
-    client: 'pg',
-    connection: process.env.DATABASE_URL || localPg,
-    useNullAsDefault: true,
-    migrations: {
-      directory: './data/migrations'
-    },
-    seeds: {
-      directory: './data/seeds'
-    }
+    ...postgres,
+    connection: process.env.DATABASE_URL
   }
 }
