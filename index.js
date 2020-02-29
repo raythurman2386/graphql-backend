@@ -1,5 +1,5 @@
-const server = require('./api/server')
+const { app, server } = require('./api/server')
 
-server.listen().then(({ url }) => {
-  console.log(`Server ready at ${url}`)
-})
+app.listen({ port: 4000 }, () =>
+  console.log(`Server listening at http://localhost:4000`)
+)
