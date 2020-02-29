@@ -1,24 +1,15 @@
-require('dotenv').config
 const express = require('express')
-const cors = require('cors')
-const graphqlHTTP = require('express-graphql')
-const { GraphQLSchema } = graphql
+const { ApolloServer } = require('apollo-server-express')
+const typeDefs = require('../types')
+const resolvers = require('../resolvers')
 
-const server = express()
-server.use(
-  cors({
-    origin: '*',
-    methods: 'GET,PUT,POST,DELETE',
-    preflightContinue: false
-  })
-)
+const app = express()
 
-server.use(
-  '/graphql',
-  graphqlHTTP({
-    schema,
-    graphiql: process.env.NODE_ENV === 'development'
-  })
-)
+const server = new ApolloServer({
+  typeDefs,
+  resolvers
+})
+
+server.applyMiddleware({ app })
 
 module.exports = server
