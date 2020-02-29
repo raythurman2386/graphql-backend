@@ -4,6 +4,8 @@ const typeDefs = gql`
   type Query {
     techs: [Tech!]!
     jobs: [Job!]!
+    tech(id: ID!): Tech
+    job(id: ID!): Job
   }
 
   type User {
