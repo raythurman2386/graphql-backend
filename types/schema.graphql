@@ -1,5 +1,8 @@
 type Query {
-
+  techs: [Tech!]!
+  tech(id: ID!): Tech
+  jobs: [Job!]!
+  job(id: ID!): Job
 }
 
 type User {
