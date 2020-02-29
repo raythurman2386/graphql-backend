@@ -7,7 +7,7 @@ const generateToken = require('../token/generateToken')
 async function signup(parent, args, context, info) {
   const password = await bcrypt.hash(args.password, 10)
 
-  const user = await User.add({ ...args, password })
+  const [user] = await User.add({ ...args, password })
 
   const token = await generateToken(user)
 
@@ -19,6 +19,7 @@ async function signup(parent, args, context, info) {
 
 async function login(parent, args, context, info) {
   const user = await User.findBy({ email: args.email })
+  console.log(user)
   if (!user) {
     throw new Error('No such user found')
   }
