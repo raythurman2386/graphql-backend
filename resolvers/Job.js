@@ -1,7 +1,7 @@
 const { Tech } = require('../models/Model')
 
 function tech(parent, args) {
-  return Tech.findBy({ tech_id: args.tech })
+  return Tech.findBy({ id: parent.id })
 }
 
 module.exports = {
