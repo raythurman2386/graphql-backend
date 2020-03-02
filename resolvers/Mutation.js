@@ -23,7 +23,7 @@ async function login(parent, { email, password }, context) {
 
   const token = generateToken(user)
 
-  const { user, info } = await context.authenticate('graphql-local', {
+  const { user, info } = context.authenticate('graphql-local', {
     email,
     password
   })

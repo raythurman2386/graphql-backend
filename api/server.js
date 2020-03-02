@@ -21,15 +21,10 @@ const server = new ApolloServer({
 passport.use(
   new GraphQLLocalStrategy(async (email, password, done) => {
     const user = await User.findBy(email)
-    console.log(user)
-
-    const error = user
-      ? null
-      : valid
-      ? null
-      : new Error('There has been an error')
-
-    done(error, { email, password })
+    if (!user) {
+      throw new Error('There has been an error')
+    }
+    done(null, { email, password })
   })
 )
 
@@ -66,4 +61,4 @@ app.get(
 
 server.applyMiddleware({ app, cors: false })
 
-module.exports = { app, server }
+module.exports = { app }
