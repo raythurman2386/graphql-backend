@@ -9,6 +9,7 @@ const { User } = require('../models/Model')
 const passport = require('passport')
 const { GraphQLLocalStrategy, buildContext } = require('graphql-passport')
 const FacebookStrategy = require('passport-facebook').Strategy
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 
 const app = express()
 const server = new ApolloServer({
@@ -34,11 +35,27 @@ passport.use(
     {
       clientID: process.env.FACEBOOK_ID,
       clientSecret: process.env.FACEBOOK_SECRET,
-      callbackURL: 'http://localhost:4000/auth/facebook/callback'
+      callbackURL: 'http://localhost:4000/auth/facebook/callback',
+      profileFields: ['id', 'displayName', 'email']
     },
     function(accessToken, refreshToken, profile, cb) {
       console.log(profile)
       cb(null, profile)
+    }
+  )
+)
+
+// Google Login
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_KEY,
+      clientSecret: process.env.GOOGLE_SECRET,
+      callbackURL: 'http://localhost:4000/auth/google/callback'
+    },
+    function(token, tokenSecret, profile, done) {
+      console.log(profile)
+      done(null, user)
     }
   )
 )
@@ -54,6 +71,18 @@ app.get(
   function(req, res) {
     // Successful authentication, redirect home.
     res.send('Worked')
+  }
+)
+
+app.get(
+  '/auth/google/callback',
+  passport.authenticate('google', {
+    scope: 'https://www.google.com/m8/feeds',
+    failureRedirect: '/login',
+    session: false
+  }),
+  function(req, res) {
+    res.send('hola')
   }
 )
 
