@@ -34,7 +34,7 @@ passport.use(
     {
       clientID: process.env.FACEBOOK_ID,
       clientSecret: process.env.FACEBOOK_SECRET,
-      callbackURL: 'https://5b99b571.ngrok.io/auth/facebook/callback'
+      callbackURL: 'http://localhost:4000/auth/facebook/callback'
     },
     function(accessToken, refreshToken, profile, cb) {
       console.log(profile)
@@ -44,8 +44,6 @@ passport.use(
 )
 
 app.use(passport.initialize())
-
-app.get('/login', passport.authenticate('facebook'))
 
 app.get(
   '/auth/facebook/callback',
