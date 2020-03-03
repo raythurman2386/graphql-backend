@@ -16,21 +16,13 @@ async function signup(parent, args, context, info) {
 }
 
 async function login(parent, { email, password }, context) {
-  const findUser = await User.findBy(email)
-  console.log(findUser)
-
-  const valid = await bcrypt.compare(password, findUser.password)
-
-  const token = generateToken(user)
-
   const { user, info } = context.authenticate('graphql-local', {
     email,
     password
   })
 
   return {
-    user,
-    token
+    user
   }
 }
 

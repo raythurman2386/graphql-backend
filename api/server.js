@@ -10,6 +10,7 @@ const passport = require('passport')
 const { GraphQLLocalStrategy, buildContext } = require('graphql-passport')
 const FacebookStrategy = require('passport-facebook').Strategy
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
+const LocalStrategy = require('passport-local').Strategy
 
 const app = express()
 const server = new ApolloServer({
@@ -22,8 +23,11 @@ const server = new ApolloServer({
 passport.use(
   new GraphQLLocalStrategy(async (email, password, done) => {
     const user = await User.findBy(email)
+    if (err) {
+      return done(err)
+    }
     if (!user) {
-      throw new Error('There has been an error')
+      return done(null, false)
     }
     done(null, { email, password })
   })
