@@ -29,7 +29,7 @@ passport.use(
     if (!user) {
       return done(null, false)
     }
-    done(null, { email, password })
+    done(null, { email, password });
   })
 )
 
