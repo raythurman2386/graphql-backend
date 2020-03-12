@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs')
-const { User } = require('../models/Model')
+const { User, Tech } = require('../models/Model')
 const generateToken = require('../token/generateToken')
 
 async function signup(parent, args, context, info) {
@@ -35,7 +35,17 @@ async function login(parent, args, context, info) {
   }
 }
 
+const addTech = async (parent, args, context, info) => {
+  try {
+    const [tech] = await Tech.add(args)
+    return tech
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
 module.exports = {
   signup,
-  login
+  login,
+  addTech
 }
