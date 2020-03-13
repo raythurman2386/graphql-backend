@@ -46,14 +46,8 @@ const addTech = async (parent, args, context, info) => {
 
 const addJob = async (parent, args, context, info) => {
   try {
-    const { tech_name } = args;
-    if (tech_name) {
-      const [tech_id] = await Tech.findBy({ name: tech_name })
-      return Job.add({ ...args, tech_id })
-    }
-
-    return Job.add(args)
-
+    const [job] = await Job.add(args)
+    return job
   } catch (error) {
     throw new Error(error)
   }

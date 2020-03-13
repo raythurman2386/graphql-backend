@@ -38,7 +38,7 @@ const typeDefs = gql`
     signup(email: String!, password: String!, name: String!): AuthPayload
     login(email: String!, password: String!): AuthPayload
     addTech(name: String!): Tech
-    addJob(machine: String!, complaint: String!, tech_name: String): Job
+    addJob(machine: String!, complaint: String!, tech_id: Int): Job
   }
 `
 
