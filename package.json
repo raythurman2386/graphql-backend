@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "server": "cross-env NODE_ENV=development nodemon index.js",
+    "server": "nodemon index.js",
     "format": "prettier \"**/*.{js,jsx,html}\" --write",
-    "migrate": "cross-env NODE_ENV=development knex migrate:latest",
-    "rollback": "cross-env NODE_ENV=development knex migrate:rollback",
+    "migrate": "knex migrate:latest",
+    "rollback": "knex migrate:rollback",
     "migrate:prod": "cross-env NODE_ENV=production knex migrate:latest",
     "rollback:prod": "cross-env NODE_ENV=production knex migrate:rollback",
     "seed": "knex seed:run",
