@@ -1,7 +1,7 @@
-const Job = require('./Job')
-const Query = require('./Query')
-const Mutation = require('./Mutation')
-const Tech = require('./Tech')
+import Job from './Job'
+import Query from './Query'
+import Mutation from './Mutation'
+import Tech from './Tech'
 
 const resolvers = {
   Job,

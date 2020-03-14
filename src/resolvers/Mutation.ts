@@ -82,14 +82,14 @@ const deleteTech = async (parent: any, args: { id: number }) => {
 
 const deleteJob = async (parent: any, args: { id: any }) => {
   try {
-    await Job.remove(args.id)
+    await Model.Job.remove(args.id)
     return 'Job Removed'
   } catch (error) {
     throw new Error(error)
   }
 }
 
-module.exports = {
+export default {
   signup,
   login,
   addTech,
