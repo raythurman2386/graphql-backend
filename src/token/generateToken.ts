@@ -1,4 +1,3 @@
-import { config } from 'dotenv'
 import jwt from 'jsonwebtoken'
 
 const generateToken = (user: { id: number; username: string }) => {
