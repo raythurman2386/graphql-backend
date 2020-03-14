@@ -53,9 +53,29 @@ const addJob = async (parent, args, context, info) => {
   }
 }
 
+const updateTech = async (parent, args, context, info) => {
+  try {
+    const [tech] = await Tech.update(args.id, args)
+    return tech
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
+const updateJob = async (parent, args, context, info) => {
+  try {
+    const [job] = await Job.update(args.id, args)
+    return job
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
 module.exports = {
   signup,
   login,
   addTech,
-  addJob
+  addJob,
+  updateTech,
+  updateJob
 }
