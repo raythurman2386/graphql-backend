@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node index.ts",
+    "start": "node './dist/index.js'",
     "server": "nodemon -r 'dotenv/config' index.ts",
     "build": "npx tsc -p .",
     "format": "prettier \"**/*.{ts,tsx}\" --write",
