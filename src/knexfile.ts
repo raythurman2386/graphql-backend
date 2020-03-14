@@ -1,5 +1,5 @@
 require('dotenv').config()
-const pg = require('pg')
+import pg from 'pg'
 
 const localPg = {
   host: process.env.DB_HOST,
