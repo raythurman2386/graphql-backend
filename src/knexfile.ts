@@ -1,5 +1,5 @@
 require('dotenv').config()
-const pg = require('pg')
+import pg from 'pg'
 
 const localPg = {
   host: process.env.DB_HOST,
@@ -8,9 +8,7 @@ const localPg = {
   password: process.env.DB_PASS
 }
 
-if (!process.env.DATABASE_URL) {
-  pg.defaults.ssl = false
-} else {
+if (process.env.NODE_ENV === 'production') {
   pg.defaults.ssl = true
 }
 

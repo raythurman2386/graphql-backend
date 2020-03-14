@@ -1,7 +1,8 @@
-const db = require('../data/db-config')
+import db from '../data/db-config'
 
 class Model {
-  constructor(tablename) {
+  tablename: string
+  constructor(tablename: string) {
     this.tablename = tablename
   }
 
@@ -9,32 +10,32 @@ class Model {
     return db(this.tablename)
   }
 
-  findBy(filter) {
+  findBy(filter: { email: string }) {
     return db(this.tablename)
       .where(filter)
       .first()
   }
 
-  findById(id) {
+  findById(id: number) {
     return db(this.tablename)
       .where({ id })
       .first()
   }
 
-  add(item) {
+  add(item: object) {
     return db(this.tablename)
       .insert(item)
       .returning('*')
   }
 
-  update(id, item) {
+  update(id: number, item: object) {
     return db(this.tablename)
       .where({ id })
       .update(item)
       .returning('*')
   }
 
-  remove(id) {
+  remove(id: number) {
     return db(this.tablename)
       .where({ id })
       .del()
@@ -42,12 +43,12 @@ class Model {
 }
 
 class JobModel extends Model {
-  constructor(tablename) {
+  constructor(tablename: string) {
     super(tablename)
     this.tablename = tablename
   }
 
-  findTechJobs(id) {
+  findTechJobs(id: any) {
     return db('jobs').where({ tech_id: id })
   }
 }
@@ -56,4 +57,4 @@ const User = new Model('users')
 const Tech = new Model('techs')
 const Job = new JobModel('jobs')
 
-module.exports = { User, Tech, Job }
+export default { User, Tech, Job }

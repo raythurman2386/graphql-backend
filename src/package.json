@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "server": "nodemon index.js",
-    "format": "prettier \"**/*.{js,jsx,html}\" --write",
+    "start": "ts-node index.ts",
+    "server": "nodemon -r 'dotenv/config' index.ts",
+    "build": "npx tsc -p .",
+    "format": "prettier \"**/*.{ts,tsx}\" --write",
     "migrate": "knex migrate:latest",
     "rollback": "knex migrate:rollback",
     "migrate:prod": "cross-env NODE_ENV=production knex migrate:latest",
@@ -35,9 +36,17 @@
     "sqlite3": "^4.1.1"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.3",
+    "@types/jsonwebtoken": "^8.3.8",
+    "@types/node": "^13.9.1",
+    "@types/pg": "^7.14.3",
     "jest": "^25.1.0",
     "nodemon": "^2.0.2",
-    "supertest": "^4.0.2"
+    "supertest": "^4.0.2",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.8.3"
   },
   "jest": {
     "testEnvironment": "node"

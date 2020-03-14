@@ -1,4 +1,4 @@
-const server = require('./api/server')
+import server from './api/server'
 
 server.listen({
   port: process.env.PORT || 4000
