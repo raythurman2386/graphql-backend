@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs'
 import Model from '../models/Model'
 import generateToken from '../token/generateToken'
 
-async function signup(args: { password: string }) {
+async function signup(root: any, args: { password: string }) {
   const password = await bcrypt.hash(args.password, 10)
 
   const [user] = await Model.User.add({ ...args, password })
@@ -15,7 +15,7 @@ async function signup(args: { password: string }) {
   }
 }
 
-async function login(args: { email: string; password: string }) {
+async function login(root: any, args: { email: string; password: string }) {
   const user = await Model.User.findBy({ email: args.email })
 
   if (!user) {
