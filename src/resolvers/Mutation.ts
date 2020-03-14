@@ -1,6 +1,9 @@
 import bcrypt from 'bcryptjs'
+import { PubSub } from 'apollo-server'
 import Model from '../models/Model'
 import generateToken from '../token/generateToken'
+
+const pubsub = new PubSub()
 
 async function signup(root: any, args: { password: string }) {
   const password = await bcrypt.hash(args.password, 10)
@@ -44,9 +47,12 @@ const addTech = async (parent: any, args: any) => {
   }
 }
 
+const JOB_ADDED = 'JOB_ADDED'
+
 const addJob = async (parent: any, args: any) => {
   try {
     const [job] = await Model.Job.add(args)
+    pubsub.publish(JOB_ADDED, { newJob: args })
     return job
   } catch (error) {
     throw new Error(error)
