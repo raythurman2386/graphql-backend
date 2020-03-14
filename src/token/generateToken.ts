@@ -7,7 +7,7 @@ const generateToken = (user: { id: number; username: string }) => {
     username: user.username
   }
 
-  const secret: string = process.env.JWT_SECRET
+  const secret: string = 'this-is-just-a-test-string'
 
   const options: { expiresIn: string } = {
     expiresIn: '1d'
