@@ -4,7 +4,9 @@ const resolvers = require('../resolvers')
 
 const server = new ApolloServer({
   typeDefs,
-  resolvers
+  resolvers,
+  introspection: true,
+  playground: true
 })
 
 module.exports = server
