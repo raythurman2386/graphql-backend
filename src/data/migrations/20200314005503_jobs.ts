@@ -1,5 +1,4 @@
-import * as Knex from "knex";
-
+import * as Knex from 'knex'
 
 export async function up(knex: Knex): Promise<any> {
   await knex.schema.createTable('jobs', tbl => {
@@ -16,8 +15,6 @@ export async function up(knex: Knex): Promise<any> {
   })
 }
 
-
 export async function down(knex: Knex): Promise<any> {
   await knex.schema.dropTableIfExists('jobs')
 }
-
