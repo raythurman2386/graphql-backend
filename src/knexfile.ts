@@ -8,9 +8,7 @@ const localPg = {
   password: process.env.DB_PASS
 }
 
-if (!process.env.DATABASE_URL) {
-  pg.defaults.ssl = false
-} else {
+if (process.env.NODE_ENV === 'production') {
   pg.defaults.ssl = true
 }
 
@@ -25,7 +23,7 @@ const postgres = {
   }
 }
 
-module.exports = {
+export default {
   development: {
     ...postgres,
     connection: localPg

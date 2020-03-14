@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "server": "nodemon index.js",
-    "format": "prettier \"**/*.{js,jsx,html}\" --write",
+    "start": "ts-node index.ts",
+    "server": "nodemon index.ts",
+    "build": "npx tsc -p .",
+    "format": "prettier \"**/*.{ts,tsx}\" --write",
     "migrate": "knex migrate:latest",
     "rollback": "knex migrate:rollback",
     "migrate:prod": "cross-env NODE_ENV=production knex migrate:latest",
@@ -35,6 +36,7 @@
     "sqlite3": "^4.1.1"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
     "@types/express": "^4.17.3",
     "@types/node": "^13.9.1",
     "jest": "^25.1.0",

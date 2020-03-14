@@ -1,11 +1,11 @@
-const bcrypt = require('bcryptjs')
-const { User, Tech, Job } = require('../models/Model')
-const generateToken = require('../token/generateToken')
+import bcrypt from 'bcryptjs'
+import Model from '../models/Model'
+import generateToken from '../token/generateToken'
 
-async function signup(parent, args, context, info) {
+async function signup(args: { password: string }) {
   const password = await bcrypt.hash(args.password, 10)
 
-  const [user] = await User.add({ ...args, password })
+  const [user] = await Model.User.add({ ...args, password })
 
   const token = await generateToken(user)
 
@@ -15,8 +15,8 @@ async function signup(parent, args, context, info) {
   }
 }
 
-async function login(parent, args, context, info) {
-  const user = await User.findBy({ email: args.email })
+async function login(args: { email: string; password: string }) {
+  const user = await Model.User.findBy({ email: args.email })
 
   if (!user) {
     throw new Error('No such user found')
@@ -35,52 +35,52 @@ async function login(parent, args, context, info) {
   }
 }
 
-const addTech = async (parent, args, context, info) => {
+const addTech = async (parent: any, args: any) => {
   try {
-    const [tech] = await Tech.add(args)
+    const [tech] = await Model.Tech.add(args)
     return tech
   } catch (error) {
     throw new Error(error)
   }
 }
 
-const addJob = async (parent, args, context, info) => {
+const addJob = async (parent: any, args: any) => {
   try {
-    const [job] = await Job.add(args)
+    const [job] = await Model.Job.add(args)
     return job
   } catch (error) {
     throw new Error(error)
   }
 }
 
-const updateTech = async (parent, args, context, info) => {
+const updateTech = async (parent: any, args: { id: number }) => {
   try {
-    const [tech] = await Tech.update(args.id, args)
+    const [tech] = await Model.Tech.update(args.id, args)
     return tech
   } catch (error) {
     throw new Error(error)
   }
 }
 
-const updateJob = async (parent, args, context, info) => {
+const updateJob = async (parent: any, args: { id: number }) => {
   try {
-    const [job] = await Job.update(args.id, args)
+    const [job] = await Model.Job.update(args.id, args)
     return job
   } catch (error) {
     throw new Error(error)
   }
 }
 
-const deleteTech = async (parent, args, context, info) => {
+const deleteTech = async (parent: any, args: { id: number }) => {
   try {
-    await Tech.remove(args.id)
+    await Model.Tech.remove(args.id)
     return 'Tech Removed'
   } catch (error) {
     throw new Error(error)
   }
 }
 
-const deleteJob = async (parent, args, context, info) => {
+const deleteJob = async (parent: any, args: { id: any }) => {
   try {
     await Job.remove(args.id)
     return 'Job Removed'

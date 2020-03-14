@@ -10,4 +10,4 @@ const resolvers = {
   Tech
 }
 
-module.exports = resolvers
+export default resolvers
