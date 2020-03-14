@@ -71,11 +71,21 @@ const updateJob = async (parent, args, context, info) => {
   }
 }
 
+const deleteTech = async (parent, args, context, info) => {
+  try {
+    await Tech.remove(args.id)
+    return 'Tech Removed'
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
 module.exports = {
   signup,
   login,
   addTech,
   addJob,
   updateTech,
-  updateJob
+  updateJob,
+  deleteTech
 }
