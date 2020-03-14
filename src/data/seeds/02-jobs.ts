@@ -1,4 +1,6 @@
-exports.seed = async function(knex) {
+import * as Knex from 'knex'
+
+export async function seed(knex: Knex): Promise<any> {
   await knex('jobs').insert([
     { machine: 'test', complaint: 'something', tech_id: 1 },
     { machine: 'test', complaint: 'something', tech_id: 1 },
