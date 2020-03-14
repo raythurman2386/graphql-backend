@@ -23,7 +23,7 @@ const postgres = {
   }
 }
 
-export default {
+module.exports = {
   development: {
     ...postgres,
     connection: localPg
