@@ -88,7 +88,7 @@ const deleteTech = async (parent: any, args: { id: number }) => {
 
 const deleteJob = async (parent: any, args: { id: any }) => {
   try {
-    const [job] = await Model.Job.findById(args.id)
+    const job = await Model.Job.findById(args.id)
     await Model.Job.remove(args.id)
     return job
   } catch (error) {
