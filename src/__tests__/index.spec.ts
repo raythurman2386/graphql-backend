@@ -1,36 +1,19 @@
-import request from 'supertest'
-const db = require('../data/db-config')
+const { GraphQLSchema } = require('graphql')
+const EasyGraphQLTester = require('easygraphql-tester')
+import mainSchema from '../types'
+import mainResolvers from '../resolvers'
 
-let server: any
-
-beforeEach(() => {
-  server = require('../api/server').default
+const schema = new GraphQLSchema({
+  typeDefs: mainSchema,
+  resolvers: mainResolvers
 })
 
-afterEach((done) => {
-  server.close()
-  done()
-})
+const tester = new EasyGraphQLTester(schema)
 
-describe('Testing Job Queries', () => {
+const query = `
+  query:{ jobs { machine complaint } }
+`
 
-  test('should test the get jobs query', (done) => {
-    request(server)
-      .post('/graphql')
-      .send({ query: '{ jobs { machine complaint } }' })
-      .expect(200)
-    done()
-  })
-
-  test('should test getting a job by id of 1', (done) => {
-    request(server)
-      .post('/graphql')
-      .send({ query: '{ job(id: 1) { machine complaint }' })
-      .expect(200)
-    // expect(res.status).toBe(200)
-    // expect(res.type).toBe('application/json')
-    // expect(res.body.data.job.machine).toMatch(/test/i)
-    // console.log(res.status)
-    done()
-  })
-})
+tester.graphql(query, undefined, undefined, { isLocal: false })
+  .then((res: any) => console.log(res))
+  .catch((err: any) => console.log(err))
