@@ -1,12 +1,12 @@
 import { gql } from 'apollo-server-express'
 
 /*
-* GraphQL Types
-* - String
-* - Int
-* - Float
-* - Boolean
-*/
+ * GraphQL Types
+ * - String
+ * - Int
+ * - Float
+ * - Boolean
+ */
 
 const typeDefs = gql`
   type Query {
