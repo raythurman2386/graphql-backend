@@ -50,7 +50,7 @@ const typeDefs = gql`
     signup(email: String!, password: String!, name: String!): AuthPayload
     login(email: String!, password: String!): AuthPayload
     addTech(name: String!): Tech
-    addJob(machine: String!, complaint: String!, tech_id: ID!): Job
+    addJob(machine: String!, complaint: String!, tech_id: ID): Job
     updateTech(id: ID!, name: String!): Tech
     updateJob(id: ID!, machine: String, complaint: String, tech_id: Int): Job
     deleteTech(id: ID!): String

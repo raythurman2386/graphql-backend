@@ -47,12 +47,8 @@ const addTech = async (parent: any, args: any) => {
 
 const addJob = async (parent: any, args: any) => {
   try {
-    const { tech_id } = args
-    console.log(args, 'args')
     const tech = await Tech.findById(args.tech_id)
-    console.log(tech, 'tech')
     args.tech_id = tech.id
-    console.log(args, 'new args')
     const [job] = await Job.addNewJob(args)
     pubsub.publish(JOB_ADDED, { newJob: args })
     return job

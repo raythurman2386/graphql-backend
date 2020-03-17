@@ -10,7 +10,7 @@ class Model {
     return db(this.tablename)
   }
 
-  findBy(filter: { email: string }) {
+  findBy(filter: any) {
     return db(this.tablename)
       .where(filter)
       .first()
@@ -53,8 +53,7 @@ export class JobModel extends Model {
   }
 
   addNewJob(item: any) {
-    return db('jobs as J')
-      .join('techs as T', { 'J.tech_id': 'T.id' })
+    return db('jobs')
       .insert(item)
       .returning('*')
   }
