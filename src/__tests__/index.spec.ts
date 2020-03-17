@@ -14,6 +14,7 @@ const query = `
   query:{ jobs { machine complaint } }
 `
 
-tester.graphql(query, undefined, undefined, { isLocal: false })
+tester
+  .graphql(query, undefined, undefined, { isLocal: false })
   .then((res: any) => console.log(res))
   .catch((err: any) => console.log(err))
