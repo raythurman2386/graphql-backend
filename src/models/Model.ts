@@ -42,7 +42,7 @@ class Model {
   }
 }
 
-class JobModel extends Model {
+export class JobModel extends Model {
   constructor(tablename: string) {
     super(tablename)
     this.tablename = tablename
@@ -51,10 +51,13 @@ class JobModel extends Model {
   findTechJobs(id: any) {
     return db('jobs').where({ tech_id: id })
   }
+
+  addNewJob(item: any) {
+    return db('jobs as J')
+      .join('techs as T', { 'J.tech_id': 'T.id' })
+      .insert(item)
+      .returning('*')
+  }
 }
 
-const User = new Model('users')
-const Tech = new Model('techs')
-const Job = new JobModel('jobs')
-
-export default { User, Tech, Job }
+export default Model

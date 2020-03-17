@@ -1,7 +1,7 @@
-import Model from '../models/Model'
+import { Tech } from '../models'
 
 function tech(parent: { id: number }, args: { id: number; name: string }) {
-  return Model.Tech.findById(parent.id)
+  return Tech.findById(parent.id)
 }
 
 export default {

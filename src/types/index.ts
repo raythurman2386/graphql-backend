@@ -1,9 +1,17 @@
 import { gql } from 'apollo-server-express'
 
+/*
+* GraphQL Types
+* - String
+* - Int
+* - Float
+* - Boolean
+*/
+
 const typeDefs = gql`
   type Query {
-    techs: [Tech!]!
-    jobs: [Job!]!
+    techs: [Tech]!
+    jobs: [Job]!
     tech(id: ID!): Tech
     job(id: ID!): Job
   }
@@ -18,7 +26,7 @@ const typeDefs = gql`
   type Tech {
     id: ID!
     name: String!
-    jobs: [Job!]!
+    jobs: [Job]
   }
 
   type Job {
