@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "prestart": "npx tsc -p .",
     "start": "node './dist/index.js'",
     "server": "nodemon -r 'dotenv/config' index.ts",
     "build": "npx tsc -p .",
-    "test": "NODE_ENV=test jest --watch --verbose --coverage",
+    "test": "NODE_ENV=test jest --watch --verbose",
     "format": "prettier \"**/*.{ts,tsx}\" --write",
     "migrate": "knex migrate:latest",
     "rollback": "knex migrate:rollback",
@@ -53,6 +54,6 @@
     "typescript": "^3.8.3"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "ts-node"
   }
 }
