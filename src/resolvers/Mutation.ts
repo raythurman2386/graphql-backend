@@ -49,7 +49,7 @@ const addJob = async (parent: any, args: any) => {
   try {
     const tech = await Tech.findById(args.tech_id)
     args.tech_id = tech.id
-    const [job] = await Job.addNewJob(args)
+    const [job] = await Job.add(args)
     pubsub.publish(JOB_ADDED, { newJob: args })
     return job
   } catch (error) {

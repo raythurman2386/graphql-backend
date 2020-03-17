@@ -51,12 +51,6 @@ export class JobModel extends Model {
   findTechJobs(id: any) {
     return db('jobs').where({ tech_id: id })
   }
-
-  addNewJob(item: any) {
-    return db('jobs')
-      .insert(item)
-      .returning('*')
-  }
 }
 
 export default Model
