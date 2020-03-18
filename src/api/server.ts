@@ -6,9 +6,8 @@ import resolvers from '../resolvers'
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  introspection: process.env.NODE_ENV === 'development' || false,
-  playground: process.env.NODE_ENV === 'development' || false,
-  cors: false
+  introspection: true,
+  playground: true
 })
 
 export default server
