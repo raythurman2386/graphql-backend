@@ -1,4 +1,4 @@
-require('dotenv').config()
+import 'dotenv/config'
 import jwt from 'jsonwebtoken'
 
 const generateToken = (user: { id: number; username: string }) => {
@@ -7,7 +7,7 @@ const generateToken = (user: { id: number; username: string }) => {
     username: user.username
   }
 
-  const secret: string = 'process.env.JWT_SECRET'
+  const secret: any = process.env.JWT_SECRET
 
   const options: { expiresIn: string } = {
     expiresIn: '1d'
