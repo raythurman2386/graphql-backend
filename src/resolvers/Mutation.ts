@@ -3,12 +3,19 @@ import { JOB_ADDED, pubsub } from './Subscription'
 import { User, Job, Tech } from '../models'
 import generateToken from '../token/generateToken'
 
+interface UserType {
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+}
+
 async function signup(root: any, args: { password: string }) {
-  const password = await bcrypt.hash(args.password, 10)
+  const password: string = await bcrypt.hash(args.password, 10)
 
-  const [user] = await User.add({ ...args, password })
+  const user: UserType = await User.add({ ...args, password })
 
-  const token = await generateToken(user)
+  const token: string = await generateToken(user)
 
   return {
     token,

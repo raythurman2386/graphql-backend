@@ -1,6 +1,6 @@
 import { Tech } from '../models'
 
-function tech(parent: { tech_id: number }, args: any) {
+function tech(parent: { tech_id: number }) {
   return Tech.findById(parent.tech_id)
 }
 
