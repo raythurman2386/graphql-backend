@@ -1,8 +1,8 @@
 import 'dotenv/config'
 import jwt from 'jsonwebtoken'
 
-const generateToken = (user: { id: number; username: string }) => {
-  const payload: { subject: number; username: string } = {
+const generateToken = (user: UserValues): string => {
+  const payload: PayloadValue = {
     subject: user.id,
     username: user.username
   }
@@ -17,3 +17,13 @@ const generateToken = (user: { id: number; username: string }) => {
 }
 
 export default generateToken
+
+interface PayloadValue {
+  subject: number;
+  username: string;
+}
+
+interface UserValues {
+  id: number;
+  username: string;
+}
