@@ -7,6 +7,14 @@
     "format": "prettier \"**/*.{ts,tsx}\" --write",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "jest": {
+    "collectCoverageFrom": [
+      "**/*.{js, ts}",
+      "!**/node_modules/**",
+      "!**/vendor/**",
+      "!**/__tests__/**"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/raythurman2386/graphql-backend.git"
