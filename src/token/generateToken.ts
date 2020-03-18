@@ -19,11 +19,11 @@ const generateToken = (user: UserValues): string => {
 export default generateToken
 
 interface PayloadValue {
-  subject: number;
-  username: string;
+  subject: number
+  username: string
 }
 
 interface UserValues {
-  id: number;
-  name: string;
+  id: number
+  name: string
 }

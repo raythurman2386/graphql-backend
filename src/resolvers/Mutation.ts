@@ -3,26 +3,22 @@ import { JOB_ADDED, pubsub } from './Subscription'
 import { User, Job, Tech } from '../models'
 import generateToken from '../token/generateToken'
 
-
 interface LoginValues {
-  email: string;
-  password: string;
+  email: string
+  password: string
 }
 
-
 interface TechValues {
-  id: number;
-  name: string;
+  id: number
+  name: string
 }
 
 interface JobValues {
-  id: number;
-  machine: string;
-  complaint: string;
-  tech_id: number;
+  id: number
+  machine: string
+  complaint: string
+  tech_id: number
 }
-
-
 
 async function signup(root: any, args: { password: string }) {
   const password: string = await bcrypt.hash(args.password, 10)
