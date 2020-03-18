@@ -48,7 +48,7 @@ export class JobModel extends Model {
     this.tablename = tablename
   }
 
-  findTechJobs(id: any) {
+  findTechJobs(id: number) {
     return db('jobs').where({ tech_id: id })
   }
 }

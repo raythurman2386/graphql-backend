@@ -1,10 +1,10 @@
 import { Tech, Job } from '../models'
 
-function techs(root: any, args: any) {
+function techs() {
   return Tech.find()
 }
 
-function jobs(root: any, args: any) {
+function jobs() {
   return Job.find()
 }
 

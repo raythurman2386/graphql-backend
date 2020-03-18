@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import { ApolloServer } from 'apollo-server'
 import typeDefs from '../types'
 import resolvers from '../resolvers'
@@ -5,8 +6,8 @@ import resolvers from '../resolvers'
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  introspection: process.env.NODE_ENV !== 'production' || false,
-  playground: process.env.NODE_ENV !== 'production' || false
+  introspection: process.env.NODE_ENV === 'development' || false,
+  playground: process.env.NODE_ENV === 'development' || false
 })
 
 export default server

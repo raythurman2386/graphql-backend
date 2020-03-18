@@ -1,13 +1,13 @@
 import 'dotenv/config'
 import jwt from 'jsonwebtoken'
 
-const generateToken = (user: { id: number; username: string }) => {
-  const payload: { subject: number; username: string } = {
+const generateToken = (user: UserValues): string => {
+  const payload: PayloadValue = {
     subject: user.id,
-    username: user.username
+    username: user.name
   }
 
-  const secret: any = process.env.JWT_SECRET
+  const secret: string = process.env.JWT_SECRET || 'super-secret-key'
 
   const options: { expiresIn: string } = {
     expiresIn: '1d'
@@ -17,3 +17,13 @@ const generateToken = (user: { id: number; username: string }) => {
 }
 
 export default generateToken
+
+interface PayloadValue {
+  subject: number
+  username: string
+}
+
+interface UserValues {
+  id: number
+  name: string
+}
