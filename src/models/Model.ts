@@ -26,7 +26,6 @@ class Model {
     return db(this.tablename)
       .insert(item)
       .returning('*')
-      .first()
   }
 
   update(id: number, item: object) {

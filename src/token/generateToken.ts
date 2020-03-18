@@ -3,7 +3,8 @@ import jwt from 'jsonwebtoken'
 
 const generateToken = (user: UserValues): string => {
   const payload: PayloadValue = {
-    subject: user.id
+    subject: user.id,
+    username: user.name
   }
 
   const secret: string = process.env.JWT_SECRET || 'super-secret-key'
@@ -19,6 +20,7 @@ export default generateToken
 
 interface PayloadValue {
   subject: number;
+  username: string;
 }
 
 interface UserValues {

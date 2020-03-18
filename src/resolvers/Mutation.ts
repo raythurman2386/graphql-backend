@@ -3,19 +3,33 @@ import { JOB_ADDED, pubsub } from './Subscription'
 import { User, Job, Tech } from '../models'
 import generateToken from '../token/generateToken'
 
-interface UserType {
-  id: number;
-  name: string;
+
+interface LoginValues {
   email: string;
   password: string;
 }
 
+
+interface TechValues {
+  id: number;
+  name: string;
+}
+
+interface JobValues {
+  id: number;
+  machine: string;
+  complaint: string;
+  tech_id: number;
+}
+
+
+
 async function signup(root: any, args: { password: string }) {
   const password: string = await bcrypt.hash(args.password, 10)
 
-  const user: UserType = await User.add({ ...args, password })
+  const [user] = await User.add({ ...args, password })
 
-  const token: string = await generateToken(user)
+  const token = await generateToken(user)
 
   return {
     token,
@@ -23,7 +37,7 @@ async function signup(root: any, args: { password: string }) {
   }
 }
 
-async function login(root: any, args: { email: string; password: string }) {
+async function login(root: any, args: LoginValues) {
   const user = await User.findBy({ email: args.email })
 
   if (!user) {
@@ -35,7 +49,7 @@ async function login(root: any, args: { email: string; password: string }) {
     throw new Error('Invalid Password')
   }
 
-  const token = await generateToken(user)
+  const token: string = await generateToken(user)
 
   return {
     token,
@@ -43,7 +57,7 @@ async function login(root: any, args: { email: string; password: string }) {
   }
 }
 
-const addTech = async (parent: any, args: any) => {
+const addTech = async (parent: any, args: TechValues) => {
   try {
     const [tech] = await Tech.add(args)
     return tech
@@ -52,7 +66,7 @@ const addTech = async (parent: any, args: any) => {
   }
 }
 
-const addJob = async (parent: any, args: any) => {
+const addJob = async (parent: any, args: JobValues) => {
   try {
     const tech = await Tech.findById(args.tech_id)
     args.tech_id = tech.id
@@ -64,7 +78,7 @@ const addJob = async (parent: any, args: any) => {
   }
 }
 
-const updateTech = async (parent: any, args: { id: number }) => {
+const updateTech = async (parent: any, args: TechValues) => {
   try {
     const [tech] = await Tech.update(args.id, args)
     return tech
@@ -73,7 +87,7 @@ const updateTech = async (parent: any, args: { id: number }) => {
   }
 }
 
-const updateJob = async (parent: any, args: { id: number }) => {
+const updateJob = async (parent: any, args: JobValues) => {
   try {
     const [job] = await Job.update(args.id, args)
     return job
@@ -82,7 +96,7 @@ const updateJob = async (parent: any, args: { id: number }) => {
   }
 }
 
-const deleteTech = async (parent: any, args: { id: number }) => {
+const deleteTech = async (parent: any, args: TechValues) => {
   try {
     await Tech.remove(args.id)
     return 'Tech Removed'
@@ -91,7 +105,7 @@ const deleteTech = async (parent: any, args: { id: number }) => {
   }
 }
 
-const deleteJob = async (parent: any, args: { id: any }) => {
+const deleteJob = async (parent: any, args: JobValues) => {
   try {
     const job = await Job.findById(args.id)
     await Job.remove(args.id)
