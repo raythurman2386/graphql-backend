@@ -6,12 +6,12 @@ import resolvers from '../resolvers'
 const server = new ApolloServer({
   cors: {
     origin: process.env.ORIGIN,
-    credentials: true,
+    credentials: true
   },
   typeDefs,
   resolvers,
   introspection: true,
-  playground: true,
+  playground: true
 })
 
 export default server
