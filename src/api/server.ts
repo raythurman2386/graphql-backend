@@ -4,9 +4,7 @@ import typeDefs from '../types'
 import resolvers from '../resolvers'
 
 const server = new ApolloServer({
-  cors: {
-    origin: '*'
-  },
+
   typeDefs,
   resolvers,
   introspection: true,
