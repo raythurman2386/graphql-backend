@@ -4,11 +4,14 @@ import typeDefs from '../types'
 import resolvers from '../resolvers'
 
 const server = new ApolloServer({
+  cors: {
+    origin: process.env.ORIGIN,
+    credentials: true,
+  },
   typeDefs,
   resolvers,
   introspection: true,
   playground: true,
-  cors: { origin: process.env.ORIGIN }
 })
 
 export default server
