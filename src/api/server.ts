@@ -5,8 +5,7 @@ import resolvers from '../resolvers'
 
 const server = new ApolloServer({
   cors: {
-    origin: process.env.ORIGIN,
-    credentials: true,
+    origin: '*'
   },
   typeDefs,
   resolvers,
