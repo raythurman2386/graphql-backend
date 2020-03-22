@@ -1,15 +1,15 @@
-require('dotenv').config()
-import pg from 'pg'
+require('dotenv').config();
+import pg from 'pg';
 
 const localPg = {
   host: process.env.DB_HOST,
   database: process.env.DB_NAME,
   user: process.env.DB_USER,
   password: process.env.DB_PASS
-}
+};
 
 if (process.env.NODE_ENV === 'production') {
-  pg.defaults.ssl = true
+  pg.defaults.ssl = true;
 }
 
 const postgres = {
@@ -21,7 +21,7 @@ const postgres = {
   seeds: {
     directory: './data/seeds'
   }
-}
+};
 
 module.exports = {
   development: {
@@ -38,4 +38,4 @@ module.exports = {
     ...postgres,
     connection: process.env.DATABASE_URL
   }
-}
+};

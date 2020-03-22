@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server-express'
+import { gql } from 'apollo-server-express';
 
 /*
  * GraphQL Types
@@ -56,6 +56,6 @@ const typeDefs = gql`
     deleteTech(id: ID!): String
     deleteJob(id: ID!): Job
   }
-`
+`;
 
-export default typeDefs
+export default typeDefs;

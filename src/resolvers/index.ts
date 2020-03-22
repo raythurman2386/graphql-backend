@@ -1,8 +1,8 @@
-import Job from './Job'
-import Query from './Query'
-import Mutation from './Mutation'
-import Tech from './Tech'
-import Subscription from './Subscription'
+import Job from './Job';
+import Query from './Query';
+import Mutation from './Mutation';
+import Tech from './Tech';
+import Subscription from './Subscription';
 
 const resolvers = {
   Job,
@@ -10,6 +10,6 @@ const resolvers = {
   Mutation,
   Tech,
   Subscription
-}
+};
 
-export default resolvers
+export default resolvers;

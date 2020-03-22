@@ -1,56 +1,56 @@
-import db from '../data/db-config'
+import db from '../data/db-config';
 
 class Model {
-  tablename: string
+  tablename: string;
   constructor(tablename: string) {
-    this.tablename = tablename
+    this.tablename = tablename;
   }
 
   find() {
-    return db(this.tablename)
+    return db(this.tablename);
   }
 
   findBy(filter: any) {
     return db(this.tablename)
       .where(filter)
-      .first()
+      .first();
   }
 
   findById(id: number) {
     return db(this.tablename)
       .where({ id })
-      .first()
+      .first();
   }
 
   add(item: object) {
     return db(this.tablename)
       .insert(item)
-      .returning('*')
+      .returning('*');
   }
 
   update(id: number, item: object) {
     return db(this.tablename)
       .where({ id })
       .update(item)
-      .returning('*')
+      .returning('*');
   }
 
   remove(id: number) {
     return db(this.tablename)
       .where({ id })
-      .del()
+      .del();
   }
 }
 
 export class JobModel extends Model {
   constructor(tablename: string) {
-    super(tablename)
-    this.tablename = tablename
+    super(tablename);
+    this.tablename = tablename;
   }
 
   findTechJobs(id: number) {
-    return db('jobs').where({ tech_id: id })
+    return db('jobs').where({ tech_id: id });
   }
 }
 
-export default Model
+export default Model;

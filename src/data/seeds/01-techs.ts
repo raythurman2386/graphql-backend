@@ -1,4 +1,4 @@
-import * as Knex from 'knex'
+import * as Knex from 'knex';
 
 export async function seed(knex: Knex): Promise<any> {
   await knex('techs').insert([
@@ -9,5 +9,5 @@ export async function seed(knex: Knex): Promise<any> {
     { name: 'Noah' },
     { name: 'Brady' },
     { name: 'Eddy' }
-  ])
+  ]);
 }
