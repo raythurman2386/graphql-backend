@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "format": "prettier \"**/*.{ts,tsx}\" --write",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "coverage": "jest --coverage --detectOpenHandles --forceExit || true"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -28,5 +28,9 @@
   "homepage": "https://github.com/raythurman2386/graphql-backend#readme",
   "dependencies": {
     "prettier": "^1.19.1"
+  },
+  "devDependencies": {
+    "jest": "^25.1.0",
+    "ts-jest": "^25.2.1"
   }
 }
