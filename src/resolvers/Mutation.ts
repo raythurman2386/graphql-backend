@@ -21,10 +21,10 @@ interface JobValues {
   tech_id: number;
 }
 
-async function signup(root: any, args: { email: string, password: string }) {
+async function signup(root: any, args: { email: string; password: string }) {
   const password: string = await bcrypt.hash(args.password, 10);
 
-  await checkUser(args)
+  await checkUser(args);
 
   const [user] = await User.add({ ...args, password });
 
