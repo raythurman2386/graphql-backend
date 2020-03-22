@@ -2,6 +2,7 @@ import bcrypt from 'bcryptjs';
 import { JOB_ADDED, pubsub } from './Subscription';
 import { User, Job, Tech } from '../models';
 import generateToken from '../token/generateToken';
+import { checkUser } from '../utils/checkEmail';
 
 interface LoginValues {
   email: string;
@@ -20,8 +21,10 @@ interface JobValues {
   tech_id: number;
 }
 
-async function signup(root: any, args: { password: string }) {
+async function signup(root: any, args: { email: string, password: string }) {
   const password: string = await bcrypt.hash(args.password, 10);
+
+  await checkUser(args)
 
   const [user] = await User.add({ ...args, password });
 
