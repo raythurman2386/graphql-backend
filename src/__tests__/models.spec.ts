@@ -49,4 +49,23 @@ describe('Models tests', () => {
     expect(addTech.id).toBeDefined();
     expect(addJob.id).toBeDefined();
   });
+
+  test('should update an item', async () => {
+    const tech = { name: 'Updating' };
+    const job = { machine: 'Updating', complaint: 'Updating', tech_id: 2 };
+
+    const [updateTech] = await Tech.update(1, tech);
+    const [updateJob] = await Job.update(1, job);
+
+    console.log(updateTech);
+    console.log(updateJob);
+  });
+
+  test('should delete an item', async () => {
+    const tech = await Tech.remove(2);
+    const job = await Job.remove(2);
+
+    console.log(tech);
+    console.log(job);
+  });
 });
