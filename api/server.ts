@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { ApolloServer } from 'apollo-server';
+import { ApolloServer } from 'apollo-server-express';
 import typeDefs from '../types';
 import resolvers from '../resolvers';
 

@@ -1,9 +1,9 @@
+import "dotenv/config"
 import server from './api/server';
 
+const port = process.env.PORT;
+
 server
-  .listen({
-    port: process.env.PORT || 4000
+  .listen(port, ({ url }) => {
+    console.log(`Server is running on ${url}:${port}`)
   })
-  .then(({ url }) => {
-    console.log(`Server ready at ${url}`);
-  });
