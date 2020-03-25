@@ -7,7 +7,10 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   introspection: true,
-  playground: true
+  playground: true,
+  formatError: err => {
+    return err;
+  }
 });
 
 export default server;
