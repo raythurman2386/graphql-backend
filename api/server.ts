@@ -16,7 +16,7 @@ const server = new ApolloServer({
   `,
   resolvers: {
     Query: {
-      hello: () => "Hello"
+      hello: () => 'Hello'
     }
   }
 });
