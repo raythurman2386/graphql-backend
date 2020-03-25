@@ -1,16 +1,26 @@
 import 'dotenv/config';
+import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
-import typeDefs from '../types';
-import resolvers from '../resolvers';
+import { createConnection } from 'typeorm';
+
+const app = express();
+app.get('/', (_req, res) => res.send('Welcome to Team Builder!'));
+
+createConnection();
 
 const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  introspection: true,
-  playground: true,
-  formatError: err => {
-    return err;
+  typeDefs: `
+    type Query {
+      hello: String
+    }
+  `,
+  resolvers: {
+    Query: {
+      hello: () => "Hello"
+    }
   }
 });
 
-export default server;
+server.applyMiddleware({ app });
+
+export default app;
