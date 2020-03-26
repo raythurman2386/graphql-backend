@@ -1,5 +1,6 @@
 import supertest from 'supertest'
 import app from '../api/server';
+import { gql } from 'apollo-server-express';
 
 describe('Basic test for index', () => {
   test('should test Welcome Route', async () => {
@@ -11,26 +12,37 @@ describe('Basic test for index', () => {
   });
 
   test('should test signup mutation', async () => {
-    const query = {
-      register(name: "Test", email: "test@test.com", password: "test")
-    }
+    const createUser = gql`
+            mutation {
+              register(data: {
+                name: "Gbolahan Olagunju",
+                email: "gbols@example.com",
+                password: "dafe",
+              })
+            }
+            `;
 
-    const res = await supertest(app).post('/graphql').query(query)
+    const res = await supertest(app).post('/').query(createUser)
 
-    console.log(res)
+    console.log(res.status)
 
   })
 
   test('should test login mutation', async () => {
-    const query = {
-      login(email: "test@test.com", password: "test") {
-        token
-      }
-    }
+    const loginUser = gql`
+            mutation {
+              login(data: {
+                email: "gbols@example.com",
+                password: "dafe",
+              }) {
+                token
+              }
+            }
+            `;
 
-    const res = await supertest(app).post('/graphql').query(query)
+    const res = await supertest(app).post('/').query(loginUser)
 
-    console.log(res)
+    console.log(res.status)
   })
 
 });
