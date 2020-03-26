@@ -58,9 +58,7 @@ export class JobResolver {
   }
 
   @Mutation(() => String)
-  async deleteJob(
-    @Arg('id') id: number
-  ) {
+  async deleteJob(@Arg('id') id: number) {
     try {
       await Job.delete(id);
 
