@@ -25,4 +25,28 @@ export class TechResolver {
       throw new Error('There has been a problem');
     }
   }
+
+  @Mutation(() => String)
+  async updateTech(@Arg('id') id: number, @Arg('name') name: string) {
+    try {
+      await Tech.update(id, {
+        name
+      });
+
+      return 'Tech updated successfully';
+    } catch (err) {
+      throw new Error('There has been a problem');
+    }
+  }
+
+  @Mutation(() => String)
+  async deleteTech(@Arg('id') id: number) {
+    try {
+      await Tech.delete(id);
+
+      return 'Tech deleted successfully';
+    } catch (err) {
+      throw new Error('There has been a problem');
+    }
+  }
 }
