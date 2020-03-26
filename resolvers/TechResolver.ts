@@ -5,12 +5,12 @@ import { Tech } from '../entity/Tech';
 export class TechResolver {
   @Query(() => [Tech])
   techs() {
-    return Tech.find();
+    return Tech.find({ relations: ['jobs'] });
   }
 
   @Query(() => Tech)
   tech(@Arg('id') id: number) {
-    return Tech.findOne(id);
+    return Tech.findOne(id, { relations: ['jobs'] });
   }
 
   @Mutation(() => String)

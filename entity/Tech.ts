@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany } from 'typeorm';
 import { ObjectType, Field, Int } from 'type-graphql';
+import { Job } from './Jobs';
 
 @ObjectType()
 @Entity('techs')
@@ -8,7 +9,11 @@ export class Tech extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Field()
+  @Field(() => String)
   @Column()
   name: string;
+
+  @Field(() => [Job])
+  @OneToMany(() => Job, job => job.tech)
+  jobs: Job[]
 }
