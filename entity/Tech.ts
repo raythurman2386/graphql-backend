@@ -1,4 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  BaseEntity,
+  OneToMany
+} from 'typeorm';
 import { ObjectType, Field, Int } from 'type-graphql';
 import { Job } from './Jobs';
 
@@ -14,6 +20,9 @@ export class Tech extends BaseEntity {
   name: string;
 
   @Field(() => [Job])
-  @OneToMany(() => Job, job => job.tech)
-  jobs: Job[]
+  @OneToMany(
+    () => Job,
+    job => job.tech
+  )
+  jobs: Job[];
 }

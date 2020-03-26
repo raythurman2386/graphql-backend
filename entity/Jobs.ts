@@ -1,11 +1,16 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, BaseEntity } from "typeorm";
-import { ObjectType, Field, Int } from "type-graphql";
-import { Tech } from "./Tech";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  BaseEntity
+} from 'typeorm';
+import { ObjectType, Field, Int } from 'type-graphql';
+import { Tech } from './Tech';
 
 @ObjectType()
 @Entity('jobs')
 export class Job extends BaseEntity {
-
   @Field(() => Int)
   @PrimaryGeneratedColumn()
   id: number;
@@ -18,7 +23,10 @@ export class Job extends BaseEntity {
   @Column()
   complaint: string;
 
-  @Field(() => [Tech])
-  @ManyToOne(() => Tech, tech => tech.jobs)
+  @Field(() => Tech)
+  @ManyToOne(
+    () => Tech,
+    tech => tech.id
+  )
   tech: Tech;
 }
