@@ -30,25 +30,28 @@ export class UserResolver {
     return User.find();
   }
 
-  @Mutation(() => Boolean)
+  @Mutation(() => LoginResponse)
   async register(
     @Arg('name') name: string,
     @Arg('email') email: string,
-    @Arg('password') password: string
-  ) {
+    @Arg('password') password: string,
+    @Ctx() { res }: MyContext
+  ): Promise<LoginResponse> {
     const hashedPass = await hash(password, 12);
 
-    try {
-      await User.insert({
-        name,
-        email,
-        password: hashedPass
-      });
-      return true;
-    } catch (error) {
-      console.log(error);
-      return false;
-    }
+    await User.insert({
+      name,
+      email,
+      password: hashedPass
+    });
+
+    const user = await User.findOne({ where: { email } });
+
+    res.cookie('jid', generateRefreshToken(user!), { httpOnly: true });
+
+    return {
+      accessToken: generateToken(user!)
+    };
   }
 
   @Mutation(() => LoginResponse)

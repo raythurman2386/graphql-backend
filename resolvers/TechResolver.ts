@@ -13,14 +13,18 @@ export class TechResolver {
     return Tech.findOne(id, { relations: ['jobs'] });
   }
 
-  @Mutation(() => String)
+  @Mutation(() => Tech)
   async addTech(@Arg('name') name: string) {
     try {
-      await Tech.insert({
+      const newTech = await Tech.insert({
         name
       });
 
-      return 'Tech added successfully';
+      const tech = await Tech.findOne(newTech.raw[0].id, {
+        relations: ['jobs']
+      });
+
+      return tech;
     } catch (err) {
       throw new Error('There has been a problem');
     }
