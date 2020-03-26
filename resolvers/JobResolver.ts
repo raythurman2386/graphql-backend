@@ -21,7 +21,7 @@ export class JobResolver {
     @Arg('tech') tech: string
   ) {
     try {
-      const jobTech = await Tech.findOne({ where: { name: tech } })
+      const jobTech = await Tech.findOne({ where: { name: tech } });
 
       await Job.insert({
         machine,
@@ -29,7 +29,7 @@ export class JobResolver {
         tech: jobTech
       });
 
-      return "Job added successfully"
+      return 'Job added successfully';
     } catch (err) {
       throw new Error('There has been a problem');
     }

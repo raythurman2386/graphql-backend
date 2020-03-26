@@ -20,7 +20,7 @@ export class TechResolver {
         name
       });
 
-      return "Tech added successfully"
+      return 'Tech added successfully';
     } catch (err) {
       throw new Error('There has been a problem');
     }
