@@ -4,17 +4,20 @@ import { ApolloServer } from 'apollo-server-express';
 import { createConnection } from 'typeorm';
 import { buildSchema } from 'type-graphql';
 import { UserResolver } from '../resolvers/UserResolver';
+import { TechResolver } from '../resolvers/TechResolver';
 
 const app = express();
 
 (async () => {
-  app.get('/', (_req, res) => res.json({ message: 'Welcome to Team Builder API!' }));
+  app.get('/', (_req, res) =>
+    res.json({ message: 'Welcome to Team Builder API!' })
+  );
 
   await createConnection();
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [UserResolver]
+      resolvers: [UserResolver, TechResolver]
     }),
     context: ({ req, res }) => ({ req, res })
   });
