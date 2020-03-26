@@ -9,7 +9,7 @@ import { UserResolver } from '../resolvers/UserResolver';
 import { TechResolver } from '../resolvers/TechResolver';
 import { JobResolver } from '../resolvers/JobResolver';
 
-const app = express();
+const app: express.Application = express();
 
 (async () => {
   app.use(helmet());
@@ -22,7 +22,7 @@ const app = express();
 
   await createConnection();
 
-  const apolloServer = new ApolloServer({
+  const apolloServer: ApolloServer = new ApolloServer({
     schema: await buildSchema({
       resolvers: [UserResolver, TechResolver, JobResolver]
     }),
