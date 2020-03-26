@@ -23,10 +23,11 @@ export class Job extends BaseEntity {
   @Column()
   complaint: string;
 
-  @Field(() => Tech)
+  @Field(() => Tech, { nullable: true })
   @ManyToOne(
     () => Tech,
-    tech => tech.id
+    tech => tech.id,
+    { nullable: true }
   )
   tech: Tech;
 }
