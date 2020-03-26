@@ -8,7 +8,7 @@
       "start": "ts-node src/index.ts",
       "server": "nodemon --exec ts-node index.ts",
       "build": "npx tsc -p .",
-      "test": "jest --detectOpenHandles --forceExit --verbose --watchAll",
+      "test": "jest --detectOpenHandles --verbose --watchAll",
       "format": "prettier \"**/*.{ts,tsx}\" --write",
       "coverage": "jest --coverage"
    },

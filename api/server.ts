@@ -8,7 +8,7 @@ import { UserResolver } from '../resolvers/UserResolver';
 const app = express();
 
 (async () => {
-  app.get('/', (_req, res) => res.send('Hello'));
+  app.get('/', (_req, res) => res.json({ message: 'Welcome to Team Builder API!' }));
 
   await createConnection();
 
