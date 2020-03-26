@@ -1,6 +1,7 @@
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import { createConnection } from 'typeorm';
+import helmet from 'helmet';
 import { limiter } from './../utils/rateLimit';
 import { speedLimiter } from './../utils/slowDown';
 import { buildSchema } from 'type-graphql';
@@ -10,10 +11,11 @@ import { JobResolver } from '../resolvers/JobResolver';
 
 const app = express();
 
-app.use(limiter);
-app.use(speedLimiter);
-
 (async () => {
+  app.use(helmet());
+  app.use(limiter);
+  app.use(speedLimiter);
+
   app.get('/', (_req, res) =>
     res.json({ message: 'Welcome to Team Builder API!' })
   );
