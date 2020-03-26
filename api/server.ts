@@ -2,25 +2,24 @@ import 'dotenv/config';
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import { createConnection } from 'typeorm';
+import { buildSchema } from 'type-graphql';
+import { UserResolver } from '../resolvers/UserResolver';
 
 const app = express();
-app.get('/', (_req, res) => res.send('Welcome to Team Builder!'));
 
-createConnection();
+(async () => {
+  app.get('/', (_req, res) => res.send('Hello'));
 
-const server = new ApolloServer({
-  typeDefs: `
-    type Query {
-      hello: String
-    }
-  `,
-  resolvers: {
-    Query: {
-      hello: () => 'Hello'
-    }
-  }
-});
+  await createConnection();
 
-server.applyMiddleware({ app });
+  const apolloServer = new ApolloServer({
+    schema: await buildSchema({
+      resolvers: [UserResolver]
+    }),
+    context: ({ req, res }) => ({ req, res })
+  });
+
+  apolloServer.applyMiddleware({ app });
+})();
 
 export default app;
