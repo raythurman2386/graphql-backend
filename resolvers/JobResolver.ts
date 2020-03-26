@@ -5,7 +5,7 @@ import { Tech } from '../entity/Tech';
 @Resolver()
 export class JobResolver {
   @Query(() => [Job])
-  jobs() {
+  jobs(): Promise<Job[]> {
     return Job.find({ relations: ['tech'] });
   }
 
@@ -43,7 +43,7 @@ export class JobResolver {
     @Arg('machine') machine: string,
     @Arg('complaint') complaint: string,
     @Arg('tech') tech: string
-  ) {
+  ): Promise<string> {
     try {
       const jobTech = await Tech.findOne({ where: { name: tech } });
 
@@ -60,7 +60,7 @@ export class JobResolver {
   }
 
   @Mutation(() => String)
-  async deleteJob(@Arg('id') id: number) {
+  async deleteJob(@Arg('id') id: number): Promise<string> {
     try {
       await Job.delete(id);
 

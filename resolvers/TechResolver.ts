@@ -4,7 +4,7 @@ import { Tech } from '../entity/Tech';
 @Resolver()
 export class TechResolver {
   @Query(() => [Tech])
-  techs() {
+  techs(): Promise<Tech[]> {
     return Tech.find({ relations: ['jobs'] });
   }
 
@@ -31,7 +31,10 @@ export class TechResolver {
   }
 
   @Mutation(() => String)
-  async updateTech(@Arg('id') id: number, @Arg('name') name: string) {
+  async updateTech(
+    @Arg('id') id: number,
+    @Arg('name') name: string
+  ): Promise<string> {
     try {
       await Tech.update(id, {
         name
@@ -44,7 +47,7 @@ export class TechResolver {
   }
 
   @Mutation(() => String)
-  async deleteTech(@Arg('id') id: number) {
+  async deleteTech(@Arg('id') id: number): Promise<string> {
     try {
       await Tech.delete(id);
 
