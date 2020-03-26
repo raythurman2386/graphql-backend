@@ -34,4 +34,39 @@ export class JobResolver {
       throw new Error('There has been a problem');
     }
   }
+
+  @Mutation(() => String)
+  async updateJob(
+    @Arg('id') id: number,
+    @Arg('machine') machine: string,
+    @Arg('complaint') complaint: string,
+    @Arg('tech') tech: string
+  ) {
+    try {
+      const jobTech = await Tech.findOne({ where: { name: tech } });
+
+      await Job.update(id, {
+        machine,
+        complaint,
+        tech: jobTech
+      });
+
+      return 'Job updated successfully';
+    } catch (err) {
+      throw new Error('There has been a problem');
+    }
+  }
+
+  @Mutation(() => String)
+  async deleteJob(
+    @Arg('id') id: number
+  ) {
+    try {
+      await Job.delete(id);
+
+      return 'Job deleted successfully';
+    } catch (err) {
+      throw new Error('There has been a problem');
+    }
+  }
 }
