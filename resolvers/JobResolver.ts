@@ -14,7 +14,7 @@ export class JobResolver {
     return Job.findOne(id, { relations: ['tech'] });
   }
 
-  @Mutation(() => String)
+  @Mutation(() => Job)
   async addJob(
     @Arg('machine') machine: string,
     @Arg('complaint') complaint: string,
@@ -23,13 +23,15 @@ export class JobResolver {
     try {
       const jobTech = await Tech.findOne({ where: { name: tech } });
 
-      await Job.insert({
+      const newJob = await Job.insert({
         machine,
         complaint,
         tech: jobTech
       });
 
-      return 'Job added successfully';
+      const job = await Job.findOne(newJob.raw[0].id, { relations: ['tech'] });
+
+      return job;
     } catch (err) {
       throw new Error('There has been a problem');
     }
