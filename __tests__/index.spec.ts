@@ -15,26 +15,10 @@ describe('Basic test for index', () => {
     const createUser = gql`
       mutation {
         register(
-          data: {
-            name: "Gbolahan Olagunju"
-            email: "gbols@example.com"
-            password: "dafe"
-          }
-        )
-      }
-    `;
-
-    const res = await supertest(app)
-      .post('/')
-      .query(createUser);
-
-    console.log(res.status);
-  });
-
-  test('should test login mutation', async () => {
-    const loginUser = gql`
-      mutation {
-        login(data: { email: "gbols@example.com", password: "dafe" }) {
+          name: "Gbolahan Olagunju"
+          email: "gbols@example.com"
+          password: "dafe"
+        ) {
           token
         }
       }
@@ -42,8 +26,24 @@ describe('Basic test for index', () => {
 
     const res = await supertest(app)
       .post('/')
-      .query(loginUser);
+      .query(createUser);
 
-    console.log(res.status);
+    console.log(res);
   });
+
+  // test('should test login mutation', async () => {
+  //   const loginUser = gql`
+  //     mutation {
+  //       login(data: { email: "gbols@example.com", password: "dafe" }) {
+  //         token
+  //       }
+  //     }
+  //   `;
+
+  //   const res = await supertest(app)
+  //     .post('/')
+  //     .query(loginUser);
+
+  //   console.log(res.status);
+  // });
 });
