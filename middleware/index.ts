@@ -3,8 +3,10 @@ import helmet from 'helmet';
 import { limiter } from './../utils/rateLimit';
 import { speedLimiter } from './../utils/slowDown';
 
-module.exports = app => {
-  app.use(helmet());
-  app.use(limiter);
-  app.use(speedLimiter);
-};
+const app: express.Application = express();
+
+app.use(helmet());
+app.use(limiter);
+app.use(speedLimiter);
+
+export default app;
