@@ -1,9 +1,9 @@
-import server from './api/server';
+import 'dotenv/config';
+import 'reflect-metadata';
+import app from './api/server';
 
-server
-  .listen({
-    port: process.env.PORT || 4000
-  })
-  .then(({ url }) => {
-    console.log(`Server ready at ${url}`);
-  });
+const port = process.env.PORT;
+
+app.listen(port, () => {
+  console.log(`Server is running on port:${port}`);
+});

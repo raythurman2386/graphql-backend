@@ -1,16 +1,28 @@
-import 'dotenv/config';
-import { ApolloServer } from 'apollo-server';
-import typeDefs from '../types';
-import resolvers from '../resolvers';
+import { ApolloServer } from 'apollo-server-express';
+import { createConnection } from 'typeorm';
+import { buildSchema } from 'type-graphql';
+import { UserResolver } from '../resolvers/UserResolver';
+import { TechResolver } from '../resolvers/TechResolver';
+import { JobResolver } from '../resolvers/JobResolver';
+import app from '../middleware';
 
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  introspection: true,
-  playground: true,
-  formatError: err => {
-    return err;
-  }
-});
+(async () => {
+  app.get('/', (_req, res) =>
+    res.json({ message: 'Welcome to Team Builder API!' })
+  );
 
-export default server;
+  await createConnection();
+
+  const apolloServer: ApolloServer = new ApolloServer({
+    schema: await buildSchema({
+      resolvers: [UserResolver, TechResolver, JobResolver]
+    }),
+    context: ({ req, res }) => ({ req, res })
+  });
+
+  apolloServer.applyMiddleware({
+    app
+  });
+})();
+
+export default app;
