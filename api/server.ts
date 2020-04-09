@@ -20,7 +20,9 @@ import app from '../middleware';
     context: ({ req, res }) => ({ req, res })
   });
 
-  apolloServer.applyMiddleware({ app, cors: false });
+  apolloServer.applyMiddleware({
+    app
+  });
 })();
 
 export default app;
