@@ -6,8 +6,8 @@ import resolvers from '../resolvers';
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  introspection: true,
-  playground: true,
+  introspection: process.env.NODE_ENV !== 'production',
+  playground: process.env.NODE_ENV !== 'production',
   cors: {
     origin: '*'
   }
