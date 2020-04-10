@@ -85,6 +85,8 @@ const updateTech = async (_parent: any, args: TechValues) => {
 
 const updateJob = async (_parent: any, args: JobValues) => {
   try {
+    const tech = await Tech.findById(args.tech_id);
+    args.tech_id = tech.id;
     const [job] = await Job.update(args.id, args);
     return job;
   } catch (error) {
@@ -94,8 +96,8 @@ const updateJob = async (_parent: any, args: JobValues) => {
 
 const deleteTech = async (_parent: any, args: TechValues) => {
   try {
-    await Tech.remove(args.id);
-    return 'Tech Removed';
+    const tech = await Tech.remove(args.id);
+    return tech;
   } catch (error) {
     throw new Error(error);
   }
