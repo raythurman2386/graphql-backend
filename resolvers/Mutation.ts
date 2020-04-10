@@ -1,4 +1,4 @@
-import { hashPassword, comparePassword } from './../utils/hashPassword';
+import { hashPassword, comparePassword } from '../utils/passwordTools';
 import { JOB_ADDED, pubsub } from './Subscription';
 import { User, Job, Tech } from '../models';
 import generateToken from '../token/generateToken';
