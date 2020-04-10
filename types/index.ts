@@ -53,7 +53,7 @@ const typeDefs = gql`
     addJob(machine: String!, complaint: String!, tech_id: ID): Job
     updateTech(id: ID!, name: String!): Tech
     updateJob(id: ID!, machine: String, complaint: String, tech_id: Int): Job
-    deleteTech(id: ID!): String
+    deleteTech(id: ID!): Tech
     deleteJob(id: ID!): Job
   }
 `;
