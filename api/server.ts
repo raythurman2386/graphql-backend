@@ -9,7 +9,8 @@ const server = new ApolloServer({
   introspection: process.env.NODE_ENV !== 'production',
   playground: process.env.NODE_ENV !== 'production',
   cors: {
-    origin: '*'
+    origin: '*',
+    credentials: true
   }
 });
 
