@@ -1,18 +1,20 @@
-import 'dotenv/config';
-import { ApolloServer } from 'apollo-server';
+import express from 'express';
+import { ApolloServer } from 'apollo-server-express';
 import typeDefs from '../types';
 import resolvers from '../resolvers';
 
+const app = express();
+
 const server = new ApolloServer({
-  cors: {
-    origin: '*',
-    credentials: true,
-    methods: 'GET,PUT,POST,DELETE'
-  },
   typeDefs,
   resolvers,
   introspection: process.env.NODE_ENV !== 'production',
   playground: process.env.NODE_ENV !== 'production'
 });
 
-export default server;
+server.applyMiddleware({
+  app,
+  cors: { origin: '*', credentials: true, methods: 'GET, POST' }
+});
+
+export default app;
