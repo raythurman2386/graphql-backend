@@ -14,7 +14,7 @@ const server = new ApolloServer({
 
 server.applyMiddleware({
   app,
-  cors: { origin: '*', credentials: true, methods: 'GET, POST' }
+  cors: false
 });
 
 export default app;
