@@ -10,7 +10,7 @@ if (cluster.isMaster) {
 
   console.log(`Master PID: ${process.pid}`);
 
-  cluster.on('exit', (worker, code, signal) => {
+  cluster.on('exit', (worker, code, _signal) => {
     if (code !== 0 && !worker.exitedAfterDisconnect) {
       console.log(`Worker ${worker.id} crashed. Starting new worker`);
       cluster.fork();
