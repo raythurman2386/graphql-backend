@@ -4,14 +4,14 @@ import typeDefs from '../types';
 import resolvers from '../resolvers';
 
 const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  introspection: process.env.NODE_ENV !== 'production',
-  playground: process.env.NODE_ENV !== 'production',
   cors: {
     origin: '*',
     credentials: true
-  }
+  },
+  typeDefs,
+  resolvers,
+  introspection: process.env.NODE_ENV !== 'production',
+  playground: process.env.NODE_ENV !== 'production'
 });
 
 export default server;
