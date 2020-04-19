@@ -26,7 +26,7 @@ const postgres = {
 module.exports = {
   development: {
     ...postgres,
-    connection: localPg
+    connection: process.env.DATABASE_URL || localPg
   },
 
   test: {
