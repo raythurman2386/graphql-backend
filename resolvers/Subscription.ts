@@ -3,7 +3,7 @@ export const JOB_ADDED = 'JOB_ADDED';
 
 export const pubsub = new PubSub();
 
-function newJob(parent: any, args: any, context: any, info: any) {
+function newJob(_parent: any, _args: any, _context: any, _info: any) {
   return pubsub.asyncIterator([JOB_ADDED]);
 }
 

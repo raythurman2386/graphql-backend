@@ -1,6 +1,5 @@
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
-import cors from 'cors';
 import typeDefs from '../types';
 import resolvers from '../resolvers';
 

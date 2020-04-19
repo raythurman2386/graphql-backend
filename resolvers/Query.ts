@@ -8,11 +8,11 @@ function jobs() {
   return Job.find();
 }
 
-function tech(root: any, args: { id: number }) {
+function tech(_root: any, args: { id: number }) {
   return Tech.findById(args.id);
 }
 
-function job(root: any, args: { id: number }) {
+function job(_root: any, args: { id: number }) {
   return Job.findById(args.id);
 }
 
