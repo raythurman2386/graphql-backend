@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "prestart": "npx tsc -p .",
-    "start": "node './dist/index.js'",
-    "server": "nodemon index.ts",
+    "start": "node './dist/cluster.js'",
+    "server": "nodemon cluster.ts",
     "build": "npx tsc -p .",
     "test": "jest --coverage --detectOpenHandles --forceExit --verbose --watchAll",
     "format": "prettier \"**/*.{ts,tsx}\" --write",
