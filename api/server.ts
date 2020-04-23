@@ -9,7 +9,7 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   introspection: process.env.NODE_ENV !== 'production',
-  playground: process.env.NODE_ENV !== 'production',
+  playground: process.env.NODE_ENV !== 'production'
 });
 
 server.applyMiddleware({
@@ -17,9 +17,9 @@ server.applyMiddleware({
     origin: '*',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     preflightContinue: true,
-    optionsSuccessStatus: 204,
+    optionsSuccessStatus: 204
   },
-  app,
+  app
 });
 
 export default app;
