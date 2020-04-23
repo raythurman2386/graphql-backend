@@ -9,17 +9,17 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   introspection: process.env.NODE_ENV !== 'production',
-  playground: process.env.NODE_ENV !== 'production'
+  playground: process.env.NODE_ENV !== 'production',
 });
 
 server.applyMiddleware({
   cors: {
     origin: '*',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    preflightContinue: false,
-    optionsSuccessStatus: 204
+    preflightContinue: true,
+    optionsSuccessStatus: 204,
   },
-  app
+  app,
 });
 
 export default app;
