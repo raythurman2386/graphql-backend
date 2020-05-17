@@ -12,9 +12,6 @@ const server = new ApolloServer({
   playground: process.env.NODE_ENV !== 'production'
 });
 
-server.applyMiddleware({
-  app,
-  cors: { origin: '*', credentials: true }
-});
+server.applyMiddleware({ app, cors: { origin: '*', credentials: true } });
 
 export default app;
