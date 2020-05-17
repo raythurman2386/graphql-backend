@@ -13,7 +13,7 @@ const server = new ApolloServer({
 });
 
 server.applyMiddleware({
-  cors: false,
+  cors: { origin: "*", credentials: true },
   app,
 });
 
