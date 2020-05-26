@@ -125,6 +125,21 @@ const initiateReset = async (_parent: any, args: { email: string }) => {
   }
 };
 
+const validateReset = async (
+  _parent: any,
+  args: { email: string; password: string }
+) => {
+  try {
+    const user = await User.findBy({ email: args.email });
+    const hashedPW = await hashPassword(args.password);
+    await User.update(user.id, { ...user, password: hashedPW });
+
+    return 'Your password has been reset!';
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 export default {
   signup,
   login,
@@ -134,5 +149,6 @@ export default {
   updateJob,
   deleteTech,
   deleteJob,
-  initiateReset
+  initiateReset,
+  validateReset
 };
