@@ -3,7 +3,8 @@ import { JOB_ADDED, pubsub } from './Subscription';
 import { User, Job, Tech } from '../models';
 import generateToken from '../token/generateToken';
 import { checkUser } from '../utils/checkEmail';
-import resetToken from 'token/resetToken';
+import resetToken from '../token/resetToken';
+import { sendgridEmail } from '../utils/sendgrid';
 
 interface LoginValues {
   email: string;
@@ -117,7 +118,7 @@ const deleteJob = async (_parent: any, args: JobValues) => {
 const initiateReset = async (_parent: any, args: { email: string }) => {
   try {
     const user = await User.findBy({ email: args.email });
-
+    await sendgridEmail(user.email);
     return resetToken(user.email);
   } catch (error) {
     throw new Error(error);
