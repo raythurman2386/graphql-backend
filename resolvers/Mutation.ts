@@ -3,6 +3,7 @@ import { JOB_ADDED, pubsub } from './Subscription';
 import { User, Job, Tech } from '../models';
 import generateToken from '../token/generateToken';
 import { checkUser } from '../utils/checkEmail';
+import resetToken from 'token/resetToken';
 
 interface LoginValues {
   email: string;
@@ -113,6 +114,16 @@ const deleteJob = async (_parent: any, args: JobValues) => {
   }
 };
 
+const initiateReset = async (_parent: any, args: { email: string }) => {
+  try {
+    const user = await User.findBy({ email: args.email });
+
+    return resetToken(user.email);
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 export default {
   signup,
   login,
@@ -121,5 +132,6 @@ export default {
   updateTech,
   updateJob,
   deleteTech,
-  deleteJob
+  deleteJob,
+  initiateReset
 };

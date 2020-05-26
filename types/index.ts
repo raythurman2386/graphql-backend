@@ -55,6 +55,10 @@ const typeDefs = gql`
     updateJob(id: ID!, machine: String, complaint: String, tech_id: Int): Job
     deleteTech(id: ID!): Tech
     deleteJob(id: ID!): Job
+
+    # reset password mutations
+    initiateReset(email: String!): String
+    validateReset(email: String!, password: String!): String
   }
 `;
 
